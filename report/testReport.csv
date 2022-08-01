@@ -1,0 +1,8 @@
+检查检查URL是不是写错了,,'list' object has no attribute 'keys',0,检查检查URL是不是写错了,,,检查一下请求方式,环境挂掉了或者是接口链接错了,都没请求通哪来的cookie
+http://119.29.3.184:8001/api/v1/shuini,,查询结果正确,0.191165,http://119.29.3.184:8001/api/v1/shuini,,,GET,200,<RequestsCookieJar[]>
+http://119.29.3.184:8001/api/v1/shuini,,查询结果错误,0.015483,http://119.29.3.184:8001/api/v1/shuini,,,POST,405,<RequestsCookieJar[]>
+http://119.29.3.184:8001/api/v1/shuini,,查询结果错误,0.018104,http://119.29.3.184:8001/api/v1/shuini,,,POST,405,<RequestsCookieJar[]>
+http://119.29.3.184:8001/api/v1/shuini,,查询结果错误,0.018274,http://119.29.3.184:8001/api/v1/shuini,,,POST,405,<RequestsCookieJar[]>
+http://119.29.3.184:8001/api/v1/shuini,,查询结果错误,0.016873,http://119.29.3.184:8001/api/v1/shuini,,,POST,405,<RequestsCookieJar[]>
+http://119.29.3.184:8001/api/v1/shuini,,查询结果错误,0.014993,http://119.29.3.184:8001/api/v1/shuini,,,POST,405,<RequestsCookieJar[]>
+http://119.29.3.184:8001/api/v1/shuini,,查询结果正确,0.201971,http://119.29.3.184:8001/api/v1/shuini,,,GET,200,<RequestsCookieJar[]>

@@ -5,8 +5,8 @@ import pandas as pd
 import requests
 import json
 from common.handle_data import read_config
-from common.template_case import template_case_post
-from common.create_test_data import gener_param_post
+from common.template_case import template_case_post, template_case_get
+from common.create_test_data import gener_param_post, gener_param_get
 from common.gener_basedata import BaseData
 
 
@@ -52,19 +52,22 @@ class AutoInter(object):
                 self.write_test_case_csv(test_data_dict, file_path_post)
                 # 调用模板生成测试用例
                 template_case_post(test_case_file_path, file_path_post, path)
-            if method == "get":
-                originalRefs = interface_info_dict["paths"][path][method]["requestBody"]["content"]["application/json"]["schema"]["$ref"]
-                originalRef = originalRefs.split("/")[-1]
-                # 调用获取参数的函数，得到具体的参数字典
-                params_post = self.grap_parameters(interface_info_dict, originalRef)
+            elif method == "get":
+                originalRefs = interface_info_dict["paths"][path][method]
                 # 根据参数路径创建测试数据文件路径
-                file_path_post = "data/test_data/" + originalRef + path_last[-1] + ".csv"
-                # 调用数据生成函数生成测试数据
-                test_data_dict = gener_param_post(params_post, self.params, path_last)
-                # 写入测试数据文件
-                self.write_test_case_csv(test_data_dict, file_path_post)
-                # 调用模板生成测试用例
-                template_case_post(test_case_file_path, file_path_post, path)
+                file_path_get = "data/test_data/" + path + ".csv"
+                if "parameters" in originalRefs.keys():
+                    # 调用获取参数的函数，得到具体的参数字典
+                    params_post = self.grap_parameters_get(originalRefs)
+                    # 调用数据生成函数生成测试数据
+                    test_data_dict = gener_param_get(params_post, self.params, path_last)
+                    # 写入测试数据文件
+                    self.write_test_case_csv(test_data_dict, file_path_get)
+                    # 调用模板生成测试用例
+                    template_case_get(test_case_file_path, file_path_get, path)
+                else:
+                    # 调用模板生成测试用例
+                    template_case_get(test_case_file_path, file_path_get, path)
 
     # 找出所有的参数
     def grap_parameters(self, interface_info_dict, originalRef):
@@ -85,6 +88,15 @@ class AutoInter(object):
                 description = parameters_list[parameters]["type"]
                 paramsp[parameters] = description
         # 返回该接口参数字典
+        return paramsp
+
+    # 找到get方式的所有参数
+    def grap_parameters_get(self, oRefs):
+        paramsp = {}
+        parameters_list = oRefs["parameters"]
+        for parame in parameters_list:
+            if parame["in"] == "path":
+                paramsp[parame["name"]] = paramsp[parame["in"]]
         return paramsp
 
     # 写测试数据模板
@@ -128,4 +140,4 @@ class AutoInter(object):
 
 if __name__ == "__main__":
     inter = AutoInter()
-    inter.grab_inter(["/api/v1/user/regist"])
+    inter.grab_inter(["/api/v1/shuini"])

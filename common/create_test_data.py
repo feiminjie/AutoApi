@@ -33,3 +33,12 @@ def gener_param_post(params_post, datas, path_last):
 
     return test_data_dict
 
+def gener_param_get(params_post, datas, path_last):
+    test_data_tab = {}
+    for params_key in params_post.keys():
+        # id
+        if params_key in ["user_id"]:
+            test_data_tab[params_key] = datas.set_id("get")
+
+
+    return test_data_tab

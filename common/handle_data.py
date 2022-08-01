@@ -272,7 +272,7 @@ def fath_sub(datas):
 
 
 # 生成报告数据
-def report_data(res, error_Log, run_time, test_datas, test_datas_copy, status_cod, response_cookies, url, method):
+def report_data(res="", error_Log="", run_time="", test_datas="", test_datas_copy="", status_cod="", response_cookies="", url="", method=""):
     report_dict = {'testcase': url}
     report_dict['result'] = res
     report_dict['message'] = error_Log

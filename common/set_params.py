@@ -12,12 +12,18 @@ class SetParams(object):
         """
         ty: 表示是否必填
         """
+        ids = ""
         if ty == "M":
             ids= [
                 # 格式为错误数据列表
                 [0],
                 # 格式为正确数据列表
                 ["唯一"]
+            ]
+        elif ty == "get":
+            ids = [
+                [""],
+                [128272524]
             ]
         return ids
 

@@ -30,6 +30,7 @@ for test_data in test_case_data_dict:
 		response_cookies = response.cookies
 		url = response.url
 		method = response.request.method
+		error_Log = ''
 		if 'detail' in ret_dict.keys():
 			error_Log = ret_dict['detail']
 			result = 'fail'
